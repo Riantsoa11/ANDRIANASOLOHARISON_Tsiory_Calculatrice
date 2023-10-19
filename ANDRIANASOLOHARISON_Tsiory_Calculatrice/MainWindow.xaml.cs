@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 
 namespace ANDRIANASOLOHARISON_Tsiory_Calculatrice
 {
-   //Definition des valeurs
+    //Definition des valeurs
     public partial class MainWindow : Window
     {
         double N1 = 0;// Première valeur de l'opération
@@ -93,22 +93,48 @@ namespace ANDRIANASOLOHARISON_Tsiory_Calculatrice
         {
             AppendNumberToDisplay("0");
         }
-
+        //Clear
         private void BTN_Clear_Click(object sender, RoutedEventArgs e)
         {
             ClearCalculator();
         }
-
+        //Egale
         private void BTN_Egale_Click(object sender, RoutedEventArgs e)
         {
             CalculateResult();
         }
-
+        //Division
         private void BTN_Division_Click(object sender, RoutedEventArgs e)
         {
             SetOperation('/');
         }
-        
+        //Tan
+        private void BTN_Tan_Click(object sender, RoutedEventArgs e)
+        {
+            N1 = double.Parse(TB_Display.Text);
+            TB_Display.Text = "";
+            operation = 't';
+        }
+        //Cos
+        private void BTN_Cos_Click(object sender, RoutedEventArgs e)
+        {
+            N1 = double.Parse(TB_Display.Text);
+            TB_Display.Text = "";
+            operation = 'c';
+        }
+        //Racine
+        private void BTN_Racine_Click(object sender, RoutedEventArgs e)
+        {
+            N1 = double.Parse(TB_Display.Text);
+            TB_Display.Text = "";
+            operation = 'r';
+        }
+        //Virgule
+        private void BTN_Virgule_Click(object sender, RoutedEventArgs e)
+        {
+            AppendNumberToDisplay(",");
+        }
+        //Remise valeur a neutre
         private void AppendNumberToDisplay(string number)
         {
             TB_Display.Text += number;
@@ -116,8 +142,11 @@ namespace ANDRIANASOLOHARISON_Tsiory_Calculatrice
 
         private void SetOperation(char op)
         {
+            // Récupère le nombre actuel dans le champ de texte (TB_Display) et le stocke dans la variable N1.
             N1 = double.Parse(TB_Display.Text);
+            // Réinitialise le champ de texte (TB_Display) à "" pour commencer à saisir un nouveau nombre.
             TB_Display.Text = "";
+            // Stocke le caractère '' dans la variable 'operation', indiquant que l'opération à effectuer.
             operation = op;
         }
         // Méthode pour effacer le calculateur
@@ -126,7 +155,7 @@ namespace ANDRIANASOLOHARISON_Tsiory_Calculatrice
             N1 = 0;
             N2 = 0;
             Result = 0;
-            // Efface l'affichage en mettant un espace vide
+            // Efface l'DTB_Display en mettant un espace vide
             TB_Display.Text = " ";
         }
         //Methode de calcul
@@ -160,11 +189,22 @@ namespace ANDRIANASOLOHARISON_Tsiory_Calculatrice
                             return;
                         }
                         break;
+                    case 'r':
+                        Result = Math.Sqrt(N1);//Calcul Racine
+                        TB_Display.Text = Result.ToString();
+                        break;
+                    case 'c':
+                        Result = Math.Cos(N1);//Calcul Cos
+                        TB_Display.Text = Result.ToString();
+                        break;
+                    case 't':
+                        Result = Math.Tan(N1);// Calcul Tan
+                        TB_Display.Text = Result.ToString();
+                        break;
                 }
-                // Affiche le résultat dans l'affichage
+                // Affiche le résultat dans l'DTB_Display
                 TB_Display.Text = Result.ToString();
             }
         }
     }
 }
-
